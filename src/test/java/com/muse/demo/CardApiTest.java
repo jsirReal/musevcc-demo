@@ -20,13 +20,85 @@ public class CardApiTest {
 
     @Test
     public void cardApply() {
-        String requestId = "APPLY-"+String.valueOf(System.currentTimeMillis());
+        String requestId = "APPLY-"+ System.currentTimeMillis();
         String respStr = client.cardApply(requestId,
                 "1",
                 "123",
                 "",
                 ""
                 );
+        System.out.println(respStr);
+    }
+
+    @Test
+    public void cardApplyResult() {
+        String requestId = "APPLY-"+ System.currentTimeMillis();
+        String respStr = client.cardApplyResult(requestId,
+                "",
+                "123",
+                "123"
+        );
+        System.out.println(respStr);
+    }
+
+    @Test
+    public void cardQuery() {
+        String cardId = "";
+        String respStr = client.cardQuery(cardId,
+                "1",
+                "123"
+        );
+        System.out.println(respStr);
+    }
+
+    @Test
+    public void cardActivate() {
+        String cardId = "";
+        String respStr = client.cardActivate(cardId,
+                "1",
+                "123"
+        );
+        System.out.println(respStr);
+    }
+
+    @Test
+    public void cardLock() {
+        String cardId = "";
+        String respStr = client.cardLock(cardId,
+                "1",
+                "123"
+        );
+        System.out.println(respStr);
+    }
+    @Test
+    public void cardUnlock() {
+        String cardId = "";
+        String respStr = client.cardUnlock(cardId,
+                "1",
+                "123"
+        );
+        System.out.println(respStr);
+    }
+
+    @Test
+    public void cardSensitiveInfoUrl() {
+        String cardId = "";
+        String respStr = client.cardSensitiveInfoUrl(cardId,
+                "123",
+                "1",
+                "123"
+        );
+        System.out.println(respStr);
+    }
+
+    @Test
+    public void cardChangePin() {
+        String cardId = "";
+        String respStr = client.cardChangePin(cardId,
+                "123",
+                "1",
+                "123"
+        );
         System.out.println(respStr);
     }
 }
