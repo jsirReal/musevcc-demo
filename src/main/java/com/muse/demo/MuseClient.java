@@ -191,4 +191,48 @@ public class MuseClient {
                 JSON.toJSONString(request));
     }
 
+    /**
+     * cardAccountTopUp
+     */
+    public String cardAccountTopUp(String request_id,String card_id, String currency,String amount,String partner_id, String user_id) {
+        CardAccountTopUpRequest request = new CardAccountTopUpRequest();
+        request.setCard_id(card_id);
+        request.setUser_id(user_id);
+        request.setCurrency(currency);
+        request.setAmount(amount);
+        request.setRequest_id(request_id);
+
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "cardaccount/topup",
+                JSON.toJSONString(request));
+    }
+
+    /**
+     * cardAccountTransactions
+     */
+    public String cardAccountTransactions(String request_id,String card_id,String order_no,String partner_id, String user_id) {
+        CardAccountTxnsRequest request = new CardAccountTxnsRequest();
+        request.setCard_id(card_id);
+        request.setUser_id(user_id);
+        request.setRequest_id(request_id);
+        request.setOrder_no(order_no);
+
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "cardaccount/transactions",
+                JSON.toJSONString(request));
+    }
+
+
 }

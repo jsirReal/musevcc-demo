@@ -1,5 +1,7 @@
 package com.muse.demo;
 
+import org.junit.jupiter.api.Test;
+
 public class CardAccountApiTest {
 
     /**
@@ -14,6 +16,32 @@ public class CardAccountApiTest {
     private final String baseUrl = "http://api.dev.musepay.io/v1/";
 
     private final MuseClient client = MuseClient.build(baseUrl, privateKey, platformKey);
+
+
+    @Test
+    public void cardAccountTopUp() {
+        String requestId = "APPLY-"+ System.currentTimeMillis();
+        String respStr = client.cardAccountTopUp(requestId,
+                "1",
+                "USDT_BSC_TEST",
+                "",
+                "",
+                ""
+        );
+        System.out.println(respStr);
+    }
+
+    @Test
+    public void cardAccountTransactions() {
+        String requestId = "APPLY-"+ System.currentTimeMillis();
+        String respStr = client.cardAccountTransactions(requestId,
+                "1",
+                "",
+                "",
+                ""
+        );
+        System.out.println(respStr);
+    }
 
 
 }
