@@ -1,4 +1,7 @@
 package com.muse.demo;
+import com.muse.demo.dto.Document;
+import com.muse.demo.dto.Address;
+import com.muse.demo.dto.Individual;
 
 
 import com.alibaba.fastjson.JSON;
@@ -29,6 +32,54 @@ public class MuseClient {
         client.httpClient = new OkHttpClient();
         return client;
     }
+
+    /**
+     * cardUserCreate
+     */
+    public String cardUserCreate(String user_name, String email,
+                                  String partner_id, String xid,Individual individual,Document document) {
+        CardUserCreateRequest request = new CardUserCreateRequest();
+        request.setUser_name(user_name);
+        request.setEmail(email);
+        request.setUser_xid(xid);
+        request.setIndividual(individual);
+        request.setDocument(document);
+
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "carduser/create",
+                JSON.toJSONString(request));
+    }
+
+    /**
+     * cardUserQuery
+     */
+    public String cardUserQuery(String user_id, String email,
+                                 String partner_id, String xid,String phone_number) {
+        CardUserQueryRequest request = new CardUserQueryRequest();
+        request.setUser_id(user_id);
+        request.setEmail(email);
+        request.setUser_xid(xid);
+        request.setPhone_number(phone_number);
+
+
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "carduser/query",
+                JSON.toJSONString(request));
+    }
+
+
 
     /**
      * cardApply

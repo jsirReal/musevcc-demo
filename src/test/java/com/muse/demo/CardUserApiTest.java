@@ -1,6 +1,11 @@
 package com.muse.demo;
 
-public class ApiTest {
+import com.muse.demo.dto.Document;
+import com.muse.demo.dto.Individual;
+import org.junit.jupiter.api.Test;
+
+
+public class CardUserApiTest {
 
     /**
      * private key, please keep it in a safe place
@@ -11,9 +16,37 @@ public class ApiTest {
      */
     public static String platformKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlzLOiHRaKpPkOnBVtCUQnFVKyKn0BNNjc4NUPAXE/jrcE/mnO6uBBEpj6Xp3yCTqCU0yL1EhLZqyvEldPahVNVhAVet2joh6LLePd7wGMf96Il+Oh8g/lj9XNfKjqRm6ed0H5j+DeV0//tMOyU0f07PjxGTVCC//EcYLLLjR/bq5LVoczypGELWaRFYRbN8bZqs2/uJ8x46mFdK+vmMYtswCdGm9xQwOB9Q4l2M/zXh4pOZqdWfmgpvhUhHjG2/PcmYT4a3R3NTFhjc4RU8LRjaoxLGdHX6qWLBZhUrsCREYKfRSA+7L0ME8Y16wySH8yqb/QuC+H7d7AbLraUBf/wIDAQAB";
 
-    private final String baseUrl = "http://api.dev.musepay.io/v1/";
+    private final String baseUrl = "https://api.dev01.musepay.io/v1/";
 
     private final MuseClient client = MuseClient.build(baseUrl, privateKey, platformKey);
 
 
+    @Test
+    public void cardUserCreate() {
+
+       Individual individual = new Individual();
+        Document document = new Document();
+        String respStr = client.cardUserCreate("abc-1",
+                "abc-1@1234.com",
+                "123",
+                "1",
+                new Individual(),
+                document
+        );
+        System.out.println(respStr);
+    }
+
+    @Test
+    public void cardUserQuery() {
+
+        Individual individual = new Individual();
+        Document document = new Document();
+        String respStr = client.cardUserQuery("",
+                "",
+                "123",
+                "1",
+                ""
+        );
+        System.out.println(respStr);
+    }
 }
