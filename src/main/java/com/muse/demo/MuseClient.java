@@ -267,12 +267,15 @@ public class MuseClient {
     /**
      * cardAccountTransactions
      */
-    public String cardAccountTransactions(String request_id,String card_id,String order_no,String partner_id, String user_id) {
+    public String cardAccountTransactions(String request_id,String card_id,String order_no,String partner_id, String user_id,int pageNumber) {
         CardAccountTxnsRequest request = new CardAccountTxnsRequest();
         request.setCard_id(card_id);
         request.setUser_id(user_id);
         request.setRequest_id(request_id);
         request.setOrder_no(order_no);
+        request.setPage_number(pageNumber);
+        request.setDate_range_from(1592772500847L);
+        request.setDate_range_to(1692772500847L);
 
         request.setPartner_id(partner_id);
         request.setSign_type("RSA");

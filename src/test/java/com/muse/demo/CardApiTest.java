@@ -23,81 +23,81 @@ public class CardApiTest {
         String requestId = "APPLY-"+ System.currentTimeMillis();
         String respStr = client.cardApply(requestId,
                 "1",
-                "123",
-                "",
-                ""
+                "PD100003500001",
+                "2000601",
+                "1001581"
                 );
         System.out.println(respStr);
     }
 
     @Test
     public void cardApplyResult() {
-        String requestId = "APPLY-"+ System.currentTimeMillis();
-        String respStr = client.cardApplyResult(requestId,
-                "",
-                "123",
-                "123"
+
+        String respStr = client.cardApplyResult("APPLY-1692689464479",
+                "202316926894664191218089352690597897",
+                "2000601",
+                "1001581"
         );
         System.out.println(respStr);
     }
 
     @Test
     public void cardQuery() {
-        String cardId = "";
+        String cardId = "VC1218089352690597900";
         String respStr = client.cardQuery(cardId,
-                "1",
-                "123"
+                "2000601",
+                "1001581"
         );
         System.out.println(respStr);
     }
 
     @Test
     public void cardActivate() {
-        String cardId = "";
+        String cardId = "VC1218089352690597900";
         String respStr = client.cardActivate(cardId,
-                "1",
-                "123"
+                "2000601",
+                "1001581"
         );
         System.out.println(respStr);
     }
 
     @Test
     public void cardLock() {
-        String cardId = "";
+        String cardId = "VC1218089352690597900";
         String respStr = client.cardLock(cardId,
-                "1",
-                "123"
+                "2000601",
+                "1001581"
         );
         System.out.println(respStr);
     }
     @Test
     public void cardUnlock() {
-        String cardId = "";
+        String cardId = "VC1218089352690597900";
         String respStr = client.cardUnlock(cardId,
-                "1",
-                "123"
+                "2000601",
+                "1001581"
         );
         System.out.println(respStr);
     }
 
     @Test
     public void cardSensitiveInfoUrl() {
-        String cardId = "";
+        String cardId = "VC1218089352690597900";
         String respStr = client.cardSensitiveInfoUrl(cardId,
-                "123",
-                "1",
-                "123"
+                "211.21.6.181",
+                "2000601",
+                "1001581"
         );
         System.out.println(respStr);
     }
 
     @Test
     public void cardChangePin() {
-        String cardId = "";
+        String cardId = "VC1218089352690597900";
         String respStr = client.cardChangePin(cardId,
                 "123",
-                "1",
-                "123"
+                "2000601",
+                "1001581"
         );
         System.out.println(respStr);
     }

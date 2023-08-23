@@ -22,25 +22,28 @@ public class CardAccountApiTest {
     public void cardAccountTopUp() {
         String requestId = "APPLY-"+ System.currentTimeMillis();
         String respStr = client.cardAccountTopUp(requestId,
-                "1",
+                "VC1218089352690597900",
                 "USDT_BSC_TEST",
-                "",
-                "",
-                ""
+                "10",
+                "2000601",
+                "1001581"
         );
         System.out.println(respStr);
     }
 
     @Test
     public void cardAccountTransactions() {
+
         String requestId = "APPLY-"+ System.currentTimeMillis();
-        String respStr = client.cardAccountTransactions(requestId,
-                "1",
+        String respStr = client.cardAccountTransactions("",
+                "VC1218089352690597900",
                 "",
-                "",
-                ""
+                "2000601",
+                "1001581",
+                1
         );
         System.out.println(respStr);
+
     }
 
 
