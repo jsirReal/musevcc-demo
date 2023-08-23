@@ -62,6 +62,16 @@ public class CardApiTest {
     }
 
     @Test
+    public void physicalCardActivate() {
+        String cardId = "VC1218089352690597900";
+        String respStr = client.physicalCardActivate(cardId,
+                "2000601",
+                "1001581"
+        );
+        System.out.println(respStr);
+    }
+
+    @Test
     public void cardLock() {
         String cardId = "VC1218089352690597900";
         String respStr = client.cardLock(cardId,
@@ -95,7 +105,7 @@ public class CardApiTest {
     public void cardChangePin() {
         String cardId = "VC1218089352690597900";
         String respStr = client.cardChangePin(cardId,
-                "123",
+                "123456",
                 "2000601",
                 "1001581"
         );

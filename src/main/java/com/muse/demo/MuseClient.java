@@ -165,6 +165,26 @@ public class MuseClient {
     }
 
     /**
+     * cardActivate
+     */
+    public String physicalCardActivate(String card_id, String partner_id, String user_id) {
+        CardOperationRequest request = new CardOperationRequest();
+        request.setCard_id(card_id);
+        request.setUser_id(user_id);
+
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/activate-physical",
+                JSON.toJSONString(request));
+    }
+
+
+    /**
      * cardLock
      */
     public String cardLock(String card_id, String partner_id, String user_id) {
@@ -275,7 +295,7 @@ public class MuseClient {
         request.setOrder_no(order_no);
         request.setPage_number(pageNumber);
         request.setDate_range_from(1592772500847L);
-        request.setDate_range_to(1692772500847L);
+
 
         request.setPartner_id(partner_id);
         request.setSign_type("RSA");
