@@ -7,7 +7,9 @@ import com.muse.demo.dto.Individual;
 import com.alibaba.fastjson.JSON;
 import com.muse.demo.dto.*;
 import com.muse.demo.utils.OkHttpUtils;
+import com.muse.demo.utils.RSAUtils;
 import com.muse.demo.utils.SignUtils;
+import lombok.SneakyThrows;
 import okhttp3.OkHttpClient;
 
 public class MuseClient {
@@ -37,7 +39,7 @@ public class MuseClient {
      * cardUserCreate
      */
     public String cardUserCreate(String user_name, String email,
-                                  String partner_id, String xid,Individual individual,Document document) {
+                                 String partner_id, String xid,Individual individual,Document document) {
         CardUserCreateRequest request = new CardUserCreateRequest();
         request.setUser_name(user_name);
         request.setEmail(email);
@@ -60,7 +62,7 @@ public class MuseClient {
      * cardUserQuery
      */
     public String cardUserQuery(String user_id, String email,
-                                 String partner_id, String xid,String phone_number) {
+                                String partner_id, String xid,String phone_number) {
         CardUserQueryRequest request = new CardUserQueryRequest();
         request.setUser_id(user_id);
         request.setEmail(email);
@@ -85,7 +87,7 @@ public class MuseClient {
      * cardApply
      */
     public String cardApply(String request_id, String card_level, String card_product_id,
-                                      String partner_id, String user_id) {
+                            String partner_id, String user_id) {
         CardApplyRequest request = new CardApplyRequest();
         request.setRequest_id(request_id);
         request.setCard_level(card_level);
@@ -109,7 +111,7 @@ public class MuseClient {
      * cardApplyResult
      */
     public String cardApplyResult(String request_id, String apply_id,
-                            String partner_id, String user_id) {
+                                  String partner_id, String user_id) {
         CardApplyResultRequest request = new CardApplyResultRequest();
         request.setRequest_id(request_id);
         request.setApply_id(apply_id);
@@ -245,11 +247,12 @@ public class MuseClient {
     /**
      * cardChangePin
      */
+    @SneakyThrows
     public String cardChangePin(String card_id, String pin,String partner_id, String user_id) {
         CardChangePinRequest request = new CardChangePinRequest();
         request.setCard_id(card_id);
         request.setUser_id(user_id);
-        request.setCard_pin(pin);
+        request.setCard_pin(RSAUtils.encrypt(pin, platformPublicKey));
 
         request.setPartner_id(partner_id);
         request.setSign_type("RSA");
