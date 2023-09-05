@@ -1,11 +1,8 @@
 package com.muse.demo;
-import com.muse.demo.dto.Document;
-import com.muse.demo.dto.Address;
-import com.muse.demo.dto.Individual;
-
 
 import com.alibaba.fastjson.JSON;
 import com.muse.demo.dto.*;
+import com.muse.demo.utils.OkHttpSSL;
 import com.muse.demo.utils.OkHttpUtils;
 import com.muse.demo.utils.RSAUtils;
 import com.muse.demo.utils.SignUtils;
@@ -32,6 +29,19 @@ public class MuseClient {
         client.merchantPrivateKey = merchantPrivateKey;
         client.platformPublicKey = platformPublicKey;
         client.httpClient = new OkHttpClient();
+        return client;
+    }
+
+    @SneakyThrows
+    public static MuseClient buildNoSSL(String baseUrl, String merchantPrivateKey, String platformPublicKey) {
+        MuseClient client = new MuseClient();
+        client.baseUrl = baseUrl;
+        client.merchantPrivateKey = merchantPrivateKey;
+        client.platformPublicKey = platformPublicKey;
+        client.httpClient = new OkHttpClient.Builder()
+                .sslSocketFactory(OkHttpSSL.getIgnoreInitedSslContext().getSocketFactory(),OkHttpSSL.IGNORE_SSL_TRUST_MANAGER_X509)
+                .hostnameVerifier(OkHttpSSL.getIgnoreSslHostnameVerifier())
+                .build();
         return client;
     }
 
