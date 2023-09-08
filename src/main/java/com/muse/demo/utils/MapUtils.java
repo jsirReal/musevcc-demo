@@ -2,6 +2,7 @@ package com.muse.demo.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -41,6 +42,12 @@ public class MapUtils {
         Collections.sort(keyList);
         for (String key : keyList){
             String value = map.get(key).toString();
+            if (map.get(key) instanceof JSONObject) {
+                JSONObject valObj =(JSONObject) map.get(key);
+                if (valObj != null && valObj.keySet().size() > 0) {
+                    value = JSONObject.toJSONString(valObj, SerializerFeature.SortField);
+                }
+            }
             //eliminate blank value
             if(StringUtils.isBlank(value) || excludes.contains(key)){
                 continue;
