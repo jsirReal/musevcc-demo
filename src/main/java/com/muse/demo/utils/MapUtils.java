@@ -42,12 +42,14 @@ public class MapUtils {
         List<String> keyList = new ArrayList<>(map.keySet());
         Collections.sort(keyList);
         for (String key : keyList){
-            String value = map.get(key).toString();
+            String value = StringUtils.EMPTY;
             if (map.get(key) instanceof JSONObject) {
                 JSONObject valObj =(JSONObject) map.get(key);
                 if (valObj != null && valObj.keySet().size() > 0) {
-                    value = JSONObject.toJSONString(valObj, SerializerFeature.MapSortField);
+                    value = jsonSort(valObj);
                 }
+            } else {
+                value = map.get(key).toString();
             }
             //eliminate blank value
             if(StringUtils.isBlank(value) || excludes.contains(key)){
@@ -61,7 +63,18 @@ public class MapUtils {
         return result;
     }
 
-
-
-
+    public static String jsonSort(JSONObject valObj) {
+        JSONObject newObj = new JSONObject();
+        for (String s : valObj.keySet()) {
+            Object v = valObj.get(s);
+            if (v == null) {
+                continue;
+            }
+            if (v instanceof String && StringUtils.isBlank((String)v)) {
+                continue;
+            }
+            newObj.put(s, v);
+        }
+        return JSONObject.toJSONString(newObj, SerializerFeature.MapSortField);
+    }
 }
