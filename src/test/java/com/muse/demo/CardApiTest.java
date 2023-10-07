@@ -52,6 +52,18 @@ public class CardApiTest {
     }
 
     @Test
+    public void updateCardPhone() {
+        String cardId = "VC1218089352690597900";
+        String respStr = client.updateCardPhone(cardId,
+                "2000601",
+                "1001581",
+                "86",
+                "15555555551"
+        );
+        System.out.println(respStr);
+    }
+
+    @Test
     public void cardActivate() {
         String cardId = "VC1218089352690597900";
         String respStr = client.cardActivate(cardId,

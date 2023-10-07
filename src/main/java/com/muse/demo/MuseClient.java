@@ -179,6 +179,27 @@ public class MuseClient {
     /**
      * cardActivate
      */
+    public String updateCardPhone(String card_id, String partner_id, String user_id,String area_code, String phone_no) {
+        CardPhoneUpdateRequest request = new CardPhoneUpdateRequest();
+        request.setCard_id(card_id);
+        request.setUser_id(user_id);
+        request.setPhone_number(phone_no);
+        request.setPhone_area_code(area_code);
+
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/update-phone",
+                JSON.toJSONString(request));
+    }
+
+    /**
+     * cardActivate
+     */
     public String physicalCardActivate(String card_id, String partner_id, String user_id) {
         CardOperationRequest request = new CardOperationRequest();
         request.setCard_id(card_id);
