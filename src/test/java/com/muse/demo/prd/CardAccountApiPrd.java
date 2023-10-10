@@ -1,8 +1,9 @@
-package com.muse.demo;
+package com.muse.demo.prd;
 
+import com.muse.demo.MuseClient;
 import org.junit.jupiter.api.Test;
 
-public class CardAccountApiTest {
+public class CardAccountApiPrd {
 
     /**
      * private key, please keep it in a safe place
@@ -12,22 +13,22 @@ public class CardAccountApiTest {
     /**
      * platform public key, please download from musepay partner dashboard
      */
-    public static String platformKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvyuW8yKhVc7LxA6Sjte7VpCPPTFgqJJj0x9e7TyjhL8wZt/uFsPtjsQmc/oIerRwIht2AecNZ07DIr23QR7SDRAapiE7UEwy/4va1TTR9vsZCQrTZ+eX7p+ksNFTDYd1+tY8EwJZW3lk9NANK45YvA7Cn1knP+96530F2NjSlbVJepuTMP7nrE+czFkzU8a8bloDN1Oh6SwkeeX//8TuTp4urk9VNscvjEEm4INAW1stNNATdYXqllBAI4d/plHEflSXfHxQVpbV/peEw+NIOoMcVwrXeBW9ZsUhcDVVASraaw7nOW9I7fqJF5uyKenlTORH7z2uoFzYwRXU27G54wIDAQAB";
+    public static String platformKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgUsKXtU5jKDRhKJFq8egN7bvFR2Gj5XZOv7aPGTdcLHqw4w7KxG+WXWd/AKO8dZyzaX2eNR4BSzNPsweWGR17KzgPbVdlkah4tqXhoE/4FGv0bedVnIzyHaKV+1EtyvKYoLEf30NjLBQL//0JUDBzlcO04BgY0ji2sGU32AdebmCRvk6wbdL54OP3D1WwjY8Hohkevnwtik/KdBxFzl8TeQ7O3bfN1n8qEVpOxMfwgQFV07XCDiBoLL0yTxgJX/d4fEo4Gci+6C0La9eP1Kw/XDbbTbeaxguqeFikY/2E/nMdwRmVNKQCwWCUlmwdbjFVGciAIc4eCfnkz/VUtuJ9QIDAQAB";
 
-    private final String baseUrl = "https://api.test.musepay.io/v1/";
+    private final String baseUrl = "https://api.musepay.pr/";
 
-    private final MuseClient client = MuseClient.build(baseUrl, privateKey, platformKey);
+    private final MuseClient client = MuseClient.buildNoSSL(baseUrl, privateKey, platformKey);
 
 
     @Test
     public void cardAccountTopUp() {
         String requestId = "APPLY-"+ System.currentTimeMillis();
         String respStr = client.cardAccountTopUp(requestId,
-                "VC1310454033106567172",
+                "VC1235902506176937990",
                 "USDT_BSC_TEST",
                 "100",
                 "2100063",
-                "1100249"
+                "1100083"
         );
         System.out.println(respStr);
     }
