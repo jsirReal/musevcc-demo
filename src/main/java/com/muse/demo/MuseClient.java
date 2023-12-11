@@ -91,6 +91,27 @@ public class MuseClient {
                 JSON.toJSONString(request));
     }
 
+    /**
+     * cardUserUploadKyc
+     */
+    public String cardUserUploadKyc(String partner_id, String xid,Individual individual,Document document,Address address) {
+        CardUserUploadKycRequest request = new CardUserUploadKycRequest();
+        request.setUser_xid(xid);
+        request.setIndividual(individual);
+        request.setDocument(document);
+        request.setAddress(new Address());
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+        request.setAddress(address);
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "carduser/upload-kyc",
+                JSON.toJSONString(request));
+    }
+
 
 
     /**
