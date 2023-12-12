@@ -53,12 +53,12 @@ public class CardApiTest {
 
     @Test
     public void updateCardPhone() {
-        String cardId = "VC1218089352690597900";
+        String cardId = "VC1235902506176937990";
         String respStr = client.updateCardPhone(cardId,
-                "2000601",
-                "1001581",
+                "2100063",
+                "1100083",
                 "86",
-                "15555555551"
+                "16665555551"
         );
         System.out.println(respStr);
     }

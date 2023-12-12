@@ -26,8 +26,8 @@ public class CardUserApiTest {
     public void cardUserCreate() {
 
         Individual individual = new Individual();
-        individual.setLast_name("TimApi3");
-        individual.setFirst_name("ZhouAPi3");
+        individual.setLast_name("TimApi4");
+        individual.setFirst_name("ZhouAPi4");
         individual.setDate_of_birth("1990-10-10");
         individual.setOccupation("aaa");
         individual.setAnnual_income("100000");
@@ -43,7 +43,7 @@ public class CardUserApiTest {
 
 
         String respStr = client.cardUserCreate("Tim-api-2",
-                "timapi3@163.com",
+                "1228368563@qq.com",
                 "2100063",
                 "10003",
                 individual,
