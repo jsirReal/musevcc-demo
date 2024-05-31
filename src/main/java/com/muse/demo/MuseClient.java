@@ -363,5 +363,48 @@ public class MuseClient {
                 JSON.toJSONString(request));
     }
 
+    /**
+     * 查询商户余额
+     * @param currency
+     * @param partner_id
+     * @return
+     */
+    public String queryPartnerBalance(String currency, String partner_id) {
+        QueryPartnerBalanceRequest request = new QueryPartnerBalanceRequest();
+        request.setCurrency(currency);
+
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "balance/partner",
+                JSON.toJSONString(request));
+    }
+
+    /**
+     * 查询商户地址
+     * @param currency
+     * @param partner_id
+     * @return
+     */
+    public String queryPartnerAddress(String currency, String partner_id, String description) {
+        QueryPartnerAddressRequest request = new QueryPartnerAddressRequest();
+        request.setCurrency(currency);
+        request.setDescription(description);
+
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "balance/partner-address",
+                JSON.toJSONString(request));
+    }
+
 
 }
