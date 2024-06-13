@@ -1,5 +1,6 @@
-package com.muse.demo;
+package com.muse.demo.test;
 
+import com.muse.demo.MuseClient;
 import org.junit.jupiter.api.Test;
 
 public class CardAccountApiTest {
@@ -23,11 +24,11 @@ public class CardAccountApiTest {
     public void cardAccountTopUp() {
         String requestId = "APPLY-"+ System.currentTimeMillis();
         String respStr = client.cardAccountTopUp(requestId,
-                "VC1310454033106567172",
-                "USDT_BSC_TEST",
-                "100",
+                "VC1803055171025731588",
+                "USDT",
+                "10",
                 "2100063",
-                "1100249"
+                "1101549"
         );
         System.out.println(respStr);
     }

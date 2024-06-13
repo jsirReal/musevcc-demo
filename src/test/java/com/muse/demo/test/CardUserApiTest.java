@@ -1,5 +1,6 @@
-package com.muse.demo;
+package com.muse.demo.test;
 
+import com.muse.demo.MuseClient;
 import com.muse.demo.dto.Address;
 import com.muse.demo.dto.Document;
 import com.muse.demo.dto.Individual;
@@ -26,8 +27,8 @@ public class CardUserApiTest {
     public void cardUserCreate() {
 
         Individual individual = new Individual();
-        individual.setLast_name("TimApi4");
-        individual.setFirst_name("ZhouAPi4");
+        individual.setLast_name("TimApi12");
+        individual.setFirst_name("ZhouAPi12");
         individual.setDate_of_birth("1990-10-10");
         individual.setOccupation("aaa");
         individual.setAnnual_income("100000");
@@ -42,10 +43,10 @@ public class CardUserApiTest {
         document.setExpiry_date("2035-10-10");
 
 
-        String respStr = client.cardUserCreate("Tim-api-2",
-                "1228368563@qq.com",
+        String respStr = client.cardUserCreate("Tim-api-10",
+                "ztmsdu1005@163.com",
                 "2100063",
-                "10003",
+                "10012",
                 individual,
                 document
         );
@@ -60,7 +61,7 @@ public class CardUserApiTest {
         String respStr = client.cardUserQuery("",
                 "",
                 "2100063",
-                "10001",
+                "10008",
                 ""
         );
         System.out.println(respStr);
@@ -70,8 +71,8 @@ public class CardUserApiTest {
     public void cardUserKycUpload() {
 
         Individual individual = new Individual();
-        individual.setLast_name("jack2");
-        individual.setFirst_name("micky2");
+        individual.setLast_name("TimApi9");
+        individual.setFirst_name("ZhouAPi9");
         individual.setDate_of_birth("1982-10-10");
         individual.setOccupation("aaa");
         individual.setAnnual_income("100000");
@@ -87,8 +88,8 @@ public class CardUserApiTest {
 
 
         String respStr = client.cardUserUploadKyc(
-                "2000601",
-                "2",
+                "2100063",
+                "10009",
                 individual,
                 document,
                 new Address()
