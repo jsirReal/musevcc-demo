@@ -26,7 +26,7 @@ public class CardAccountApiTest {
         String respStr = client.cardAccountTopUp(requestId,
                 "VC1803055171025731588",
                 "USDT",
-                "10",
+                "11",
                 "2100063",
                 "1101549"
         );

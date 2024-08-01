@@ -39,7 +39,7 @@ public class MuseClient {
         client.merchantPrivateKey = merchantPrivateKey;
         client.platformPublicKey = platformPublicKey;
         client.httpClient = new OkHttpClient.Builder()
-                .sslSocketFactory(OkHttpSSL.getIgnoreInitedSslContext().getSocketFactory(),OkHttpSSL.IGNORE_SSL_TRUST_MANAGER_X509)
+                .sslSocketFactory(OkHttpSSL.getIgnoreInitedSslContext().getSocketFactory(), OkHttpSSL.IGNORE_SSL_TRUST_MANAGER_X509)
                 .hostnameVerifier(OkHttpSSL.getIgnoreSslHostnameVerifier())
                 .build();
         return client;
@@ -49,7 +49,7 @@ public class MuseClient {
      * cardUserCreate
      */
     public String cardUserCreate(String user_name, String email,
-                                 String partner_id, String xid,Individual individual,Document document) {
+                                 String partner_id, String xid, Individual individual, Document document) {
         CardUserCreateRequest request = new CardUserCreateRequest();
         request.setUser_name(user_name);
         request.setEmail(email);
@@ -72,7 +72,7 @@ public class MuseClient {
      * cardUserQuery
      */
     public String cardUserQuery(String user_id, String email,
-                                String partner_id, String xid,String phone_number) {
+                                String partner_id, String xid, String phone_number) {
         CardUserQueryRequest request = new CardUserQueryRequest();
         request.setUser_id(user_id);
         request.setEmail(email);
@@ -94,7 +94,7 @@ public class MuseClient {
     /**
      * cardUserUploadKyc
      */
-    public String cardUserUploadKyc(String partner_id, String xid,Individual individual,Document document,Address address) {
+    public String cardUserUploadKyc(String partner_id, String xid, Individual individual, Document document, Address address) {
         CardUserUploadKycRequest request = new CardUserUploadKycRequest();
         request.setUser_xid(xid);
         request.setIndividual(individual);
@@ -111,7 +111,6 @@ public class MuseClient {
         return OkHttpUtils.doPost(httpClient, baseUrl + "carduser/upload-kyc",
                 JSON.toJSONString(request));
     }
-
 
 
     /**
@@ -200,7 +199,7 @@ public class MuseClient {
     /**
      * cardActivate
      */
-    public String updateCardPhone(String card_id, String partner_id, String user_id,String area_code, String phone_no) {
+    public String updateCardPhone(String card_id, String partner_id, String user_id, String area_code, String phone_no) {
         CardPhoneUpdateRequest request = new CardPhoneUpdateRequest();
         request.setCard_id(card_id);
         request.setUser_id(user_id);
@@ -279,7 +278,7 @@ public class MuseClient {
     /**
      * cardSensitiveInfoUrl
      */
-    public String cardSensitiveInfoUrl(String card_id, String ip_address,String partner_id, String user_id) {
+    public String cardSensitiveInfoUrl(String card_id, String ip_address, String partner_id, String user_id) {
         CardSensitiveInfoRequest request = new CardSensitiveInfoRequest();
         request.setCard_id(card_id);
         request.setUser_id(user_id);
@@ -300,7 +299,7 @@ public class MuseClient {
      * cardChangePin
      */
     @SneakyThrows
-    public String cardChangePin(String card_id, String pin,String partner_id, String user_id) {
+    public String cardChangePin(String card_id, String pin, String partner_id, String user_id) {
         CardChangePinRequest request = new CardChangePinRequest();
         request.setCard_id(card_id);
         request.setUser_id(user_id);
@@ -320,7 +319,7 @@ public class MuseClient {
     /**
      * cardAccountTopUp
      */
-    public String cardAccountTopUp(String request_id,String card_id, String currency,String amount,String partner_id, String user_id) {
+    public String cardAccountTopUp(String request_id, String card_id, String currency, String amount, String partner_id, String user_id) {
         CardAccountTopUpRequest request = new CardAccountTopUpRequest();
         request.setCard_id(card_id);
         request.setUser_id(user_id);
@@ -343,7 +342,7 @@ public class MuseClient {
     /**
      * cardAccountTransactions
      */
-    public String cardAccountTransactions(String request_id,String card_id,String order_no,String partner_id, String user_id,int pageNumber) {
+    public String cardAccountTransactions(String request_id, String card_id, String order_no, String partner_id, String user_id, int pageNumber) {
         CardAccountTxnsRequest request = new CardAccountTxnsRequest();
         request.setCard_id(card_id);
         request.setUser_id(user_id);
@@ -366,6 +365,7 @@ public class MuseClient {
 
     /**
      * 查询商户余额
+     *
      * @param currency
      * @param partner_id
      * @return
@@ -387,6 +387,7 @@ public class MuseClient {
 
     /**
      * 查询商户地址
+     *
      * @param currency
      * @param partner_id
      * @return
@@ -407,5 +408,25 @@ public class MuseClient {
                 JSON.toJSONString(request));
     }
 
+    /**
+     * 替换卡
+     */
+
+    public String cardReplace(String user_id, String original_card_id, String replace_reason, String partner_id) {
+        CardReplaceRequest request = new CardReplaceRequest();
+        request.setUser_id(user_id);
+        request.setOriginal_card_id(original_card_id);
+        request.setReplace_reason(replace_reason);
+
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/replace",
+                JSON.toJSONString(request));
+    }
 
 }

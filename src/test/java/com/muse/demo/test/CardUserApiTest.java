@@ -44,9 +44,9 @@ public class CardUserApiTest {
 
 
         String respStr = client.cardUserCreate("Tim-api-10",
-                "ztmsdu1005@163.com",
+                "ztmsdu1006@163.com",
                 "2100063",
-                "10012",
+                "10013",
                 individual,
                 document
         );
