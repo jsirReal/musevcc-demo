@@ -3,6 +3,8 @@ package com.muse.demo.test;
 import com.muse.demo.MuseClient;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 public class CardApiTest {
 
     /**
@@ -25,7 +27,7 @@ public class CardApiTest {
         String requestId = "APPLY-" + System.currentTimeMillis();
         String respStr = client.cardApply(requestId,
                 "1",
-                "PD100000900001",
+                "PD100010700004",
                 "2100063",
                 "1104553"
         );
@@ -35,10 +37,10 @@ public class CardApiTest {
     @Test
     public void cardApplyResult() {
 
-        String respStr = client.cardApplyResult("APPLY-1692689464479",
-                "202316926894664191218089352690597897",
-                "2000601",
-                "1001581"
+        String respStr = client.cardApplyResult("APPLY-1722482322001",
+                "202417224823236282241764124477947915",
+                "2100063",
+                "1104553"
         );
         System.out.println(respStr);
     }
@@ -67,10 +69,10 @@ public class CardApiTest {
 
     @Test
     public void cardActivate() {
-        String cardId = "VC1218089352690597900";
+        String cardId = "VC2257045102723268608";
         String respStr = client.cardActivate(cardId,
-                "2000601",
-                "1001581"
+                "2100063",
+                "1104553"
         );
         System.out.println(respStr);
     }
@@ -131,10 +133,22 @@ public class CardApiTest {
     public void cardReplace() throws Exception {
         String respStr = client.cardReplace(
                 "1104553",
-                "VC2241764124477947918",
+                "VC2257045102723268608",
                 "测试替换卡",
                 "2100063"
         );
         System.out.println(respStr);
+    }
+
+    @Test
+    public void limitChange() throws Exception {
+        String respStr = client.limitChange(
+                "2100063",
+                "1101549",
+                "VC1803055171025731588",
+                BigDecimal.valueOf(123)
+        );
+        System.out.println(respStr);
+
     }
 }

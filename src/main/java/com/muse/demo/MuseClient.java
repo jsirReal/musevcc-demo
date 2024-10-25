@@ -9,6 +9,8 @@ import com.muse.demo.utils.SignUtils;
 import lombok.SneakyThrows;
 import okhttp3.OkHttpClient;
 
+import java.math.BigDecimal;
+
 public class MuseClient {
 
     private String merchantPrivateKey;
@@ -429,4 +431,23 @@ public class MuseClient {
                 JSON.toJSONString(request));
     }
 
+    /**
+     * 设置卡日限额
+     */
+    public String limitChange( String partner_id,  String user_id, String card_id, BigDecimal daily_purchase_limit) {
+        LimitChangeRequest request = new LimitChangeRequest();
+        request.setPartner_id(partner_id);
+        request.setUser_id(user_id);
+        request.setCard_id(card_id);
+        request.setDaily_purchase_limit(daily_purchase_limit);
+
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/limitChange",
+                JSON.toJSONString(request));
+    }
 }
