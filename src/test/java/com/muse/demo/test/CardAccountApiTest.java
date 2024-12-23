@@ -24,11 +24,11 @@ public class CardAccountApiTest {
     public void cardAccountTopUp() {
         String requestId = "APPLY-"+ System.currentTimeMillis();
         String respStr = client.cardAccountTopUp(requestId,
-                "VC2245438554900070412",
+                "VC1235902506176937990",
                 "USDT",
-                "10",
+                "8",
                 "2100063",
-                "1104553"
+                "1100083"
         );
         System.out.println(respStr);
     }
@@ -39,10 +39,13 @@ public class CardAccountApiTest {
         String requestId = "APPLY-"+ System.currentTimeMillis();
         String respStr = client.cardAccountTransactions("",
                 "VC1235902506176937990",
-                "",
+                "202316932773351761238288377689735176",
                 "2100063",
                 "1100083",
-                1
+                1,
+                "",
+                "",
+                ""
         );
         System.out.println(respStr);
 

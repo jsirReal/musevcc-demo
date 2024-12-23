@@ -42,7 +42,10 @@ public class CardAccountApiPrd {
                 "",
                 "2100063",
                 "1100083",
-                1
+                1,
+                "",
+                "",
+                ""
         );
         System.out.println(respStr);
 

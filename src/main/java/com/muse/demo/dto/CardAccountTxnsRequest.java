@@ -36,6 +36,11 @@ public class CardAccountTxnsRequest extends CommonRequest {
 
     private Integer page_number;
 
+    private String tx_status;
+
+    private String tx_type;
+
+    private String detail_id;
 
 
 }

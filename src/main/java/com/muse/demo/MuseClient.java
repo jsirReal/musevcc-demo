@@ -30,6 +30,7 @@ public class MuseClient {
         client.baseUrl = baseUrl;
         client.merchantPrivateKey = merchantPrivateKey;
         client.platformPublicKey = platformPublicKey;
+
         client.httpClient = new OkHttpClient();
         return client;
     }
@@ -344,7 +345,7 @@ public class MuseClient {
     /**
      * cardAccountTransactions
      */
-    public String cardAccountTransactions(String request_id, String card_id, String order_no, String partner_id, String user_id, int pageNumber) {
+    public String cardAccountTransactions(String request_id, String card_id, String order_no, String partner_id, String user_id, int pageNumber, String tx_status, String tx_type, String detail_id) {
         CardAccountTxnsRequest request = new CardAccountTxnsRequest();
         request.setCard_id(card_id);
         request.setUser_id(user_id);
@@ -352,6 +353,9 @@ public class MuseClient {
         request.setOrder_no(order_no);
         request.setPage_number(pageNumber);
         request.setDate_range_from(1592772500847L);
+        request.setTx_status(tx_status);
+        request.setTx_type(tx_type);
+        request.setDetail_id(detail_id);
 
 
         request.setPartner_id(partner_id);
@@ -414,11 +418,12 @@ public class MuseClient {
      * 替换卡
      */
 
-    public String cardReplace(String user_id, String original_card_id, String replace_reason, String partner_id) {
+    public String cardReplace(String user_id, String original_card_id, String replace_reason, String partner_id, String request_id) {
         CardReplaceRequest request = new CardReplaceRequest();
         request.setUser_id(user_id);
         request.setOriginal_card_id(original_card_id);
         request.setReplace_reason(replace_reason);
+        request.setRequest_id(request_id);
 
         request.setPartner_id(partner_id);
         request.setSign_type("RSA");
@@ -434,7 +439,7 @@ public class MuseClient {
     /**
      * 设置卡日限额
      */
-    public String limitChange( String partner_id,  String user_id, String card_id, BigDecimal daily_purchase_limit) {
+    public String limitChange(String partner_id, String user_id, String card_id, BigDecimal daily_purchase_limit) {
         LimitChangeRequest request = new LimitChangeRequest();
         request.setPartner_id(partner_id);
         request.setUser_id(user_id);
@@ -448,6 +453,42 @@ public class MuseClient {
         SignUtils.sign(request, merchantPrivateKey);
 
         return OkHttpUtils.doPost(httpClient, baseUrl + "card/limitChange",
+                JSON.toJSONString(request));
+    }
+
+    public String txnVerificationConfirm(String partner_id, String user_id, String card_id, String token, String request_id) {
+        TxnVerificationConfirmRequest request = new TxnVerificationConfirmRequest();
+        request.setPartner_id(partner_id);
+        request.setUser_id(user_id);
+        request.setCard_id(card_id);
+        request.setToken(token);
+        request.setRequest_id(request_id);
+
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/txn-verification-confirm",
+                JSON.toJSONString(request));
+    }
+
+    public String txnVerificationDecline(String partner_id, String user_id, String card_id, String token, String request_id) {
+        TxnVerificationDeclineRequest request = new TxnVerificationDeclineRequest();
+        request.setPartner_id(partner_id);
+        request.setUser_id(user_id);
+        request.setCard_id(card_id);
+        request.setToken(token);
+        request.setRequest_id(request_id);
+
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/txn-verification-decline",
                 JSON.toJSONString(request));
     }
 }

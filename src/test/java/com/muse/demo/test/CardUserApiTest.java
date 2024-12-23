@@ -44,9 +44,9 @@ public class CardUserApiTest {
 
 
         String respStr = client.cardUserCreate("Tim-api-10",
-                "ztmsdu1006@163.com",
+                "ztmsdu1234@163.com",
                 "2100063",
-                "10013",
+                "10017",
                 individual,
                 document
         );
@@ -58,10 +58,10 @@ public class CardUserApiTest {
 
         Individual individual = new Individual();
         Document document = new Document();
-        String respStr = client.cardUserQuery("",
+        String respStr = client.cardUserQuery("1107523",
                 "",
                 "2100063",
-                "10008",
+                "10014",
                 ""
         );
         System.out.println(respStr);

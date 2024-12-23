@@ -1,6 +1,7 @@
 package com.muse.demo.tim;
 
-public class Login {
+import org.junit.jupiter.api.Test;
 
+public class Login {
 
 }
