@@ -19,6 +19,8 @@ public class MuseClient {
 
     private String baseUrl;
 
+    private String partnerId;
+
     private OkHttpClient httpClient;
 
     private void MuseClient() {
@@ -30,6 +32,17 @@ public class MuseClient {
         client.baseUrl = baseUrl;
         client.merchantPrivateKey = merchantPrivateKey;
         client.platformPublicKey = platformPublicKey;
+
+        client.httpClient = new OkHttpClient();
+        return client;
+    }
+
+    public static MuseClient build(String baseUrl, String merchantPrivateKey, String platformPublicKey, String partnerId) {
+        MuseClient client = new MuseClient();
+        client.baseUrl = baseUrl;
+        client.merchantPrivateKey = merchantPrivateKey;
+        client.platformPublicKey = platformPublicKey;
+        client.partnerId = partnerId;
 
         client.httpClient = new OkHttpClient();
         return client;
@@ -60,7 +73,7 @@ public class MuseClient {
         request.setIndividual(individual);
         request.setDocument(document);
 
-        request.setPartner_id(partner_id);
+        request.setPartner_id(partnerId);
         request.setSign_type("RSA");
         request.setTimestamp(String.valueOf(System.currentTimeMillis()));
         request.setNonce(String.valueOf(System.currentTimeMillis()));
@@ -70,6 +83,26 @@ public class MuseClient {
         return OkHttpUtils.doPost(httpClient, baseUrl + "carduser/create",
                 JSON.toJSONString(request));
     }
+
+    /**
+     * cardUserCreate with kyc application link
+     */
+    public String cardUserCreateWithKycLink(String user_name, String email,
+                                 String xid) {
+        CardUserCreate2Request request = new CardUserCreate2Request();
+        request.setUser_name(user_name);
+        request.setEmail(email);
+        request.setUser_xid(xid);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+        request.setPartner_id(this.partnerId);
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "carduser/create-with-kyc-link",
+                JSON.toJSONString(request));
+    }
+
 
     /**
      * cardUserQuery

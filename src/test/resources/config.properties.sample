@@ -1,0 +1,6 @@
+baseUrl=http://localhost:8080/v1/
+# private key, please keep it in a safe place
+privateKey=xxxx
+# platform public key, please download from musepay partner dashboard
+platformKey=xxxx
+partnerId=2001011
