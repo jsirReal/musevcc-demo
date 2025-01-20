@@ -103,6 +103,20 @@ public class MuseClient {
                 JSON.toJSONString(request));
     }
 
+    /**
+     * generate kyc application link for user
+     */
+    public String generateKycLink(String xid) {
+        CardUserKycLinkRequest request = new CardUserKycLinkRequest();
+        request.setUser_xid(xid);
+        request.setPartner_id(this.partnerId);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+        SignUtils.sign(request, merchantPrivateKey);
+        return OkHttpUtils.doPost(httpClient, baseUrl + "carduser/kyc-link", JSON.toJSONString(request));
+    }
+
 
     /**
      * cardUserQuery

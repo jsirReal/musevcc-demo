@@ -29,7 +29,7 @@ public class CardUserApiTest extends BaseTest {
         document.setExpiry_date("2035-10-10");
 
         String respStr = client.cardUserCreate("Tim-api-10",
-                "ztmsdu1234@163.com",
+                "hjojggbu.dev@musepay.io",
                 partnerId,
                 "10017",
                 individual,
@@ -55,7 +55,14 @@ public class CardUserApiTest extends BaseTest {
         log.info("cardUserCreateWithKycLink resp: {}", respStr);
 
         pollingUserQuery(xid);
+    }
 
+    @Test
+    public void generateKycLink() {
+        String xid = "XID-" + 43243339;
+        log.info("XID：{}", xid);
+        String respStr = client.generateKycLink(xid);
+        log.info("generateKycLink resp: {}", respStr);
     }
 
     public void pollingUserQuery(String xid) throws InterruptedException {
@@ -71,9 +78,6 @@ public class CardUserApiTest extends BaseTest {
         }
 
     }
-
-
-
 
     @Test
     public void cardUserQuery() {
