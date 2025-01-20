@@ -62,7 +62,7 @@ public class CardUserApiTest extends BaseTest {
             String respStr = client.cardUserQuery(null,
                     "",
                     partnerId,
-                    "XID-61356336",
+                    "XID-33753352",
                     ""
             );
             System.out.println(respStr);

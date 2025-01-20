@@ -114,8 +114,6 @@ public class MuseClient {
         request.setEmail(email);
         request.setUser_xid(xid);
         request.setPhone_number(phone_number);
-
-
         request.setPartner_id(partner_id);
         request.setSign_type("RSA");
         request.setTimestamp(String.valueOf(System.currentTimeMillis()));
