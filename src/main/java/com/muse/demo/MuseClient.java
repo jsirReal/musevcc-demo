@@ -73,7 +73,7 @@ public class MuseClient {
         request.setIndividual(individual);
         request.setDocument(document);
 
-        request.setPartner_id(partnerId);
+        request.setPartner_id(partner_id);
         request.setSign_type("RSA");
         request.setTimestamp(String.valueOf(System.currentTimeMillis()));
         request.setNonce(String.valueOf(System.currentTimeMillis()));
@@ -84,32 +84,33 @@ public class MuseClient {
                 JSON.toJSONString(request));
     }
 
-    /**
-     * cardUserCreate with kyc application link
-     */
-    public String cardUserCreateWithKycLink(String user_name, String email,
-                                 String xid) {
-        CardUserCreate2Request request = new CardUserCreate2Request();
+    public String cardUserCreateWithKYCLink(String user_name, String email,
+                                            String partner_id, String xid) {
+        CardUserCreateRequest request = new CardUserCreateRequest();
         request.setUser_name(user_name);
         request.setEmail(email);
         request.setUser_xid(xid);
+
+        request.setPartner_id(partner_id);
         request.setSign_type("RSA");
         request.setTimestamp(String.valueOf(System.currentTimeMillis()));
         request.setNonce(String.valueOf(System.currentTimeMillis()));
-        request.setPartner_id(this.partnerId);
+
         SignUtils.sign(request, merchantPrivateKey);
 
         return OkHttpUtils.doPost(httpClient, baseUrl + "carduser/create-with-kyc-link",
                 JSON.toJSONString(request));
     }
 
+
+
     /**
      * generate kyc application link for user
      */
-    public String generateKycLink(String xid) {
+    public String generateKycLink(String xid,String partner_id) {
         CardUserKycLinkRequest request = new CardUserKycLinkRequest();
         request.setUser_xid(xid);
-        request.setPartner_id(this.partnerId);
+        request.setPartner_id(partner_id);
         request.setSign_type("RSA");
         request.setTimestamp(String.valueOf(System.currentTimeMillis()));
         request.setNonce(String.valueOf(System.currentTimeMillis()));

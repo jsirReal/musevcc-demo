@@ -4,9 +4,11 @@ import com.muse.demo.MuseClient;
 import com.muse.demo.dto.Address;
 import com.muse.demo.dto.Document;
 import com.muse.demo.dto.Individual;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 
+@Slf4j
 public class CardUserApiTest {
 
     /**
@@ -27,8 +29,8 @@ public class CardUserApiTest {
     public void cardUserCreate() {
 
         Individual individual = new Individual();
-        individual.setLast_name("TimApi12");
-        individual.setFirst_name("ZhouAPi12");
+        individual.setLast_name("TimApi13");
+        individual.setFirst_name("ZhouAPi13");
         individual.setDate_of_birth("1990-10-10");
         individual.setOccupation("aaa");
         individual.setAnnual_income("100000");
@@ -44,13 +46,33 @@ public class CardUserApiTest {
 
 
         String respStr = client.cardUserCreate("Tim-api-10",
-                "ztmsdu1234@163.com",
+                "ztmsdu1235@163.com",
                 "2100063",
-                "10017",
+                "10018",
                 individual,
                 document
         );
         System.out.println(respStr);
+    }
+
+    @Test
+    public void cardUserCreateWithKYCLink() {
+
+        String respStr = client.cardUserCreateWithKYCLink("kyc-202501230002",
+                "ztmsdukyc04@snapmail.cc",
+                "2100063",
+                "202501230002"
+        );
+        System.out.println(respStr);
+    }
+
+    @Test
+    public void generateKycLink() {
+        String xid = "202501220002" ;
+        log.info("XID：{}", xid);
+        String respStr = client.generateKycLink(xid,"2100063");
+
+        log.info("generateKycLink resp: {}", respStr);
     }
 
     @Test

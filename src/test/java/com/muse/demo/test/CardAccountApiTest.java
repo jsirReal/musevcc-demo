@@ -36,14 +36,16 @@ public class CardAccountApiTest {
     @Test
     public void cardAccountTransactions() {
 
+        // type 交易类型:CHARGE-消费;REFUND-退款;TOP_UP-充值;REPAY-还款;CASHBACK-返现;INTEREST-利息;FEE-费;OTHER-其他
+        // status  交易状态: INIT-初始化;PENDING-处理中;POSTED-已确认(成功);REJECT-已拒绝;CANCELLED-已取消
         String requestId = "APPLY-"+ System.currentTimeMillis();
         String respStr = client.cardAccountTransactions("",
                 "VC1235902506176937990",
-                "202316932773351761238288377689735176",
+                "",
                 "2100063",
                 "1100083",
                 1,
-                "",
+                "INIT",
                 "",
                 ""
         );

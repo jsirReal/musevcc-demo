@@ -38,33 +38,9 @@ public class CardUserApiTest extends BaseTest {
         log.info(respStr);
     }
 
-    @Test
-    public void cardUserCreateWithKycLink() throws InterruptedException {
-        String email = Utils.generateEmail();
-        log.info("Email generated： {}", email);
-        int id = 10000000 + new Random().nextInt(90000000);
-        String xid = "XID-" + id;
-        String username = "USERNAME-" + id;
-        log.info("XID generated： {}", xid);
-        log.info("Username generated： {}", username);
-        String respStr = client.cardUserCreateWithKycLink(
-                username,
-                email,
-                xid
-        );
-        log.info("cardUserCreateWithKycLink resp: {}", respStr);
 
-        pollingUserQuery(xid);
-    }
 
     @Test
-    public void generateKycLink() {
-        String xid = "XID-" + 43243339;
-        log.info("XID：{}", xid);
-        String respStr = client.generateKycLink(xid);
-        log.info("generateKycLink resp: {}", respStr);
-    }
-
     public void pollingUserQuery(String xid) throws InterruptedException {
         while (true) {
             String respStr = client.cardUserQuery(null,
