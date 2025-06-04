@@ -14,7 +14,8 @@ public class CardApiTest extends BaseTest {
                 "1",
                 "PD100000900001",
                 "2100063",
-                "1100083"
+                "1100083",
+                ""
         );
         System.out.println(respStr);
     }

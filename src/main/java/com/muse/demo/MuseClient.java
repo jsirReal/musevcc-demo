@@ -166,7 +166,7 @@ public class MuseClient {
      * cardApply
      */
     public String cardApply(String request_id, String card_level, String card_product_id,
-                            String partner_id, String user_id) {
+                            String partner_id, String user_id,String embossed_name) {
         CardApplyRequest request = new CardApplyRequest();
         request.setRequest_id(request_id);
         request.setCard_level(card_level);
@@ -174,6 +174,7 @@ public class MuseClient {
         request.setPhone_area_code("86");
         request.setPhone_number("13312345678");
         request.setUser_id(user_id);
+        request.setEmbossed_name(embossed_name);
 
         request.setPartner_id(partner_id);
         request.setSign_type("RSA");
@@ -476,6 +477,7 @@ public class MuseClient {
         request.setTimestamp(String.valueOf(System.currentTimeMillis()));
         request.setNonce(String.valueOf(System.currentTimeMillis()));
 
+        System.out.println(request);
         SignUtils.sign(request, merchantPrivateKey);
 
         return OkHttpUtils.doPost(httpClient, baseUrl + "card/replace",
@@ -519,6 +521,25 @@ public class MuseClient {
         return OkHttpUtils.doPost(httpClient, baseUrl + "card/txn-verification-confirm",
                 JSON.toJSONString(request));
     }
+
+    public String emailChange (String user_id,
+                              String email, String partner_id, String nonce) {
+
+        EmailChangeRequest request = new EmailChangeRequest();
+        request.setUser_id(user_id);
+        request.setEmail(email);
+
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(nonce);
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "carduser/change-email",
+                JSON.toJSONString(request));
+    }
+
 
     public String txnVerificationDecline(String partner_id, String user_id, String card_id, String token, String request_id) {
         TxnVerificationDeclineRequest request = new TxnVerificationDeclineRequest();

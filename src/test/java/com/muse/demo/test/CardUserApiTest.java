@@ -7,6 +7,11 @@ import com.muse.demo.dto.Individual;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+
 
 @Slf4j
 public class CardUserApiTest {
@@ -29,8 +34,8 @@ public class CardUserApiTest {
     public void cardUserCreate() {
 
         Individual individual = new Individual();
-        individual.setLast_name("TimApi13");
-        individual.setFirst_name("ZhouAPi13");
+        individual.setLast_name("TimApi16");
+        individual.setFirst_name("ZhouAPi16");
         individual.setDate_of_birth("1990-10-10");
         individual.setOccupation("aaa");
         individual.setAnnual_income("100000");
@@ -40,15 +45,15 @@ public class CardUserApiTest {
         document.setType("1");
         document.setFront("data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQAQAAAACoxAthAAAEMElEQVR42u1cS27lMAyTVzlGbprk3TTHyCqeiKTy60OB2c1Aeihe3cD0QrAkUlJq/a8/VpCCFKQgBfmnIJsdn9b7fvwa1rn3z2bTcHyPu437seirDX3xXWNBAPGFNti4HM83m7tj/XlfDziA2lmQY3Fs+7iRj2/sPCDxcKF53ebWCnKHHFcRt+5u1Y9bW08K8s3I7siTw0caduefHScU5O3IHu7k0cPaOozMK3qtC3JLFpvb9pefL/klLUSf1ZBMd08WCHpcbIqK3zhMVogb2W04YY8vhhUUxb14hzu7g/tPQWjklRHPsaJwYCZucEMk9GzbafaCIKB9YGdAOjfsjtU5pMFGFleQ08jQBVAEq5tUOVcCgU8KckJmxTpPGXJk6im4cwMQZi/ISUh0CUVFtjGUFBwZZ/ZIGQXBftzJEAXhyB3i3RfgwH5aQSQTPFnQnj3U6JEvDv/1nRaOvAwFESGh0nwQElzLRYf05QeHSQ3x4OZi80ZIcAi8e0bFgza/yYTsEIvS0BXxQEgaLyeJ8YuQZIaAv9FtoxDkC1YjY/EkJNkhHvqoFFjWhsPirj6KbA9CkhtikyLbkVjtLqz6WcsNGlwQO4tmICGT8155LoLe2r5rsdyQHtUM7Ddo9sPaTRHPZcKbkKSHNN+w2iWsUOLmIe7Ffqa9CElmiJM3+rLiGwiJn0DXppxXL68gas8xwwYtQU2yietGz84eGTk5JASCp1dUP7Afh7BxMNmbw6SGUEBh20dXlOU1f76QnEDa33w/OcSfRD5lL3jkd0fcaz8JSXaIlIK6Tgx3pjw7ScU/HTk7hGaU8/au1vlicm149JvCpYbAeRsMO0eBaGabAClDDfS7I2eHxGTLvWE3rFT0TK+7bulYkHNUA5eQ3eGRCZeVNEY/1I4ehe7cEANto5iKWSl3Z5SM1GH/ol7zQtiwU9FM6qDRvBb1200Ft4KcrQFPCgPpxzVDRc9d1FV5DLfkhkQREsVtpQzYtkUJN8ZEC3LJhA5CsqsjALEgLPvFVKYFCcigkYzb4MGq6HcNb9jcCyKIeuW6mZpyYTGNworlo7uwSg4heZuGaGiigdJCjZ6J9a3FUkMuR8bNHBfqKVxICquXI+eGrJrHQFN40fCnXgE4u8OfhyNnh5z1/7lHOeiSnwx9IC2PWYXEEHHd8SRsrZOZjD16nZxGuGux3BAzNdDZypTzUrPLr8+6R0FisJ9TsjFApRe+llOBsnxUkPtLExsVuhp2UZAkwaNTj/vrNZO0EL2Yo17wlWRDn0K5q9tSkOvlL5XOlCyuae1BMfA1QJUcEg07MZMpYh0m9PyQ9nLkghhf8nq9CyBaoubmFyMnh5jmMWKumNNTLWYd3yW13JB+DpXRklsYmYOgMdzyKcgzWQR5s3MuaIkBqrm/B6hSQ+p/qhSkIAUpyH8L+QM8qRjL2c9mRwAAAABJRU5ErkJggg==");
         document.setBack("");
-        document.setNumber("123");
+        document.setNumber("123456");
         document.setCountry("CN");
         document.setExpiry_date("2035-10-10");
 
 
-        String respStr = client.cardUserCreate("Tim-api-10",
-                "ztmsdu1235@163.com",
+        String respStr = client.cardUserCreate("Tim-api-16",
+                "ztmsdu1238@snapmail.cc",
                 "2100063",
-                "10018",
+                "100021",
                 individual,
                 document
         );
@@ -58,19 +63,19 @@ public class CardUserApiTest {
     @Test
     public void cardUserCreateWithKYCLink() {
 
-        String respStr = client.cardUserCreateWithKYCLink("kyc-202501230002",
-                "ztmsdukyc04@snapmail.cc",
+        String respStr = client.cardUserCreateWithKYCLink("kyc-202503040001",
+                "ztmsdu030401@snapmail.cc",
                 "2100063",
-                "202501230002"
+                "202503040001"
         );
         System.out.println(respStr);
     }
 
     @Test
     public void generateKycLink() {
-        String xid = "202501220002" ;
+        String xid = "202501220002";
         log.info("XID：{}", xid);
-        String respStr = client.generateKycLink(xid,"2100063");
+        String respStr = client.generateKycLink(xid, "2100063");
 
         log.info("generateKycLink resp: {}", respStr);
     }
@@ -90,32 +95,46 @@ public class CardUserApiTest {
     }
 
     @Test
-    public void cardUserKycUpload() {
+    public void cardUserKycUpload() throws Exception {
 
         Individual individual = new Individual();
-        individual.setLast_name("TimApi9");
-        individual.setFirst_name("ZhouAPi9");
-        individual.setDate_of_birth("1982-10-10");
-        individual.setOccupation("aaa");
-        individual.setAnnual_income("100000");
+        individual.setLast_name("TimApi9test");
+        individual.setFirst_name("ZhouAPi9test");
+        individual.setDate_of_birth("1992-10-10");
+        individual.setOccupation("bbb");
+        individual.setAnnual_income("1023500");
+
+        BufferedReader reader = new BufferedReader(
+                new FileReader(new File("/Users/zhoutianmu/Desktop/img_base64.txt"))
+        );
 
 
         Document document = new Document();
         document.setType("1");
-        document.setFront("data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQAQAAAACoxAthAAAEMElEQVR42u1cS27lMAyTVzlGbprk3TTHyCqeiKTy60OB2c1Aeihe3cD0QrAkUlJq/a8/VpCCFKQgBfmnIJsdn9b7fvwa1rn3z2bTcHyPu437seirDX3xXWNBAPGFNti4HM83m7tj/XlfDziA2lmQY3Fs+7iRj2/sPCDxcKF53ebWCnKHHFcRt+5u1Y9bW08K8s3I7siTw0caduefHScU5O3IHu7k0cPaOozMK3qtC3JLFpvb9pefL/klLUSf1ZBMd08WCHpcbIqK3zhMVogb2W04YY8vhhUUxb14hzu7g/tPQWjklRHPsaJwYCZucEMk9GzbafaCIKB9YGdAOjfsjtU5pMFGFleQ08jQBVAEq5tUOVcCgU8KckJmxTpPGXJk6im4cwMQZi/ISUh0CUVFtjGUFBwZZ/ZIGQXBftzJEAXhyB3i3RfgwH5aQSQTPFnQnj3U6JEvDv/1nRaOvAwFESGh0nwQElzLRYf05QeHSQ3x4OZi80ZIcAi8e0bFgza/yYTsEIvS0BXxQEgaLyeJ8YuQZIaAv9FtoxDkC1YjY/EkJNkhHvqoFFjWhsPirj6KbA9CkhtikyLbkVjtLqz6WcsNGlwQO4tmICGT8155LoLe2r5rsdyQHtUM7Ddo9sPaTRHPZcKbkKSHNN+w2iWsUOLmIe7Ffqa9CElmiJM3+rLiGwiJn0DXppxXL68gas8xwwYtQU2yietGz84eGTk5JASCp1dUP7Afh7BxMNmbw6SGUEBh20dXlOU1f76QnEDa33w/OcSfRD5lL3jkd0fcaz8JSXaIlIK6Tgx3pjw7ScU/HTk7hGaU8/au1vlicm149JvCpYbAeRsMO0eBaGabAClDDfS7I2eHxGTLvWE3rFT0TK+7bulYkHNUA5eQ3eGRCZeVNEY/1I4ehe7cEANto5iKWSl3Z5SM1GH/ol7zQtiwU9FM6qDRvBb1200Ft4KcrQFPCgPpxzVDRc9d1FV5DLfkhkQREsVtpQzYtkUJN8ZEC3LJhA5CsqsjALEgLPvFVKYFCcigkYzb4MGq6HcNb9jcCyKIeuW6mZpyYTGNworlo7uwSg4heZuGaGiigdJCjZ6J9a3FUkMuR8bNHBfqKVxICquXI+eGrJrHQFN40fCnXgE4u8OfhyNnh5z1/7lHOeiSnwx9IC2PWYXEEHHd8SRsrZOZjD16nZxGuGux3BAzNdDZypTzUrPLr8+6R0FisJ9TsjFApRe+llOBsnxUkPtLExsVuhp2UZAkwaNTj/vrNZO0EL2Yo17wlWRDn0K5q9tSkOvlL5XOlCyuae1BMfA1QJUcEg07MZMpYh0m9PyQ9nLkghhf8nq9CyBaoubmFyMnh5jmMWKumNNTLWYd3yW13JB+DpXRklsYmYOgMdzyKcgzWQR5s3MuaIkBqrm/B6hSQ+p/qhSkIAUpyH8L+QM8qRjL2c9mRwAAAABJRU5ErkJggg==");
+        document.setFront(reader.readLine());
         document.setBack("");
-        document.setNumber("123");
+        document.setNumber("98789789876");
         document.setCountry("CN");
         document.setExpiry_date("2035-10-10");
 
 
         String respStr = client.cardUserUploadKyc(
                 "2100063",
-                "10009",
+                "10001",
                 individual,
                 document,
                 new Address()
         );
         System.out.println(respStr);
     }
+
+    @Test
+    public void emailChange() {
+        String respStr = client.emailChange("1107523",
+                "ztmsdulv12@snapmail.cc",
+                "2100063",
+                String.valueOf(System.currentTimeMillis()));
+        System.out.println(respStr);
+    }
+
 }

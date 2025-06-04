@@ -27,7 +27,8 @@ public class CardApiPrd {
                 "1",
                 "PD100000400003",
                 "20000254",
-                "60004336"
+                "60004336",
+                ""
                 );
         System.out.println(respStr);
     }

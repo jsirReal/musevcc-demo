@@ -46,7 +46,7 @@ public class SignUtils {
 
     public static void sign(CommonRequest commonRequest, String privateKey) {
         String content = SignUtils.assembleContent(commonRequest);
-
+        System.out.println(content);
         SignRequest request = new SignRequest();
         request.setContent(content);
         request.setCharset("utf-8");

@@ -30,7 +30,8 @@ public class CardApiTest {
                 "1",
                 "PD100000900001",
                 "2100063",
-                "1100083"
+                "1109573",
+                "embossedNameTest"
         );
         System.out.println(respStr);
     }
@@ -70,7 +71,7 @@ public class CardApiTest {
 
     @Test
     public void cardActivate() {
-        String cardId = "VC2509671471315615749";
+        String cardId = "VC2836126953360457744";
         String respStr = client.cardActivate(cardId,
                 "2100063",
                 "1100083"

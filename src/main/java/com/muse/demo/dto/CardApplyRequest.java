@@ -28,4 +28,6 @@ public class CardApplyRequest extends CommonRequest {
 
     @NotBlank
     private String phone_number;
+
+    private String embossed_name;
 }
