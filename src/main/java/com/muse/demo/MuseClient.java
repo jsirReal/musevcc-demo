@@ -84,6 +84,25 @@ public class MuseClient {
                 JSON.toJSONString(request));
     }
 
+    public String aipCardUserCreate(String user_name, String email,
+                                  String xid,String partner_id) {
+        AipCardUserCreateRequest request = new AipCardUserCreateRequest();
+        request.setUser_name(user_name);
+        request.setEmail(email);
+        request.setUser_xid(xid);
+
+
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "carduser/create",
+                JSON.toJSONString(request));
+    }
+
     public String cardUserCreateWithKYCLink(String user_name, String email,
                                             String partner_id, String xid) {
         CardUserCreateRequest request = new CardUserCreateRequest();

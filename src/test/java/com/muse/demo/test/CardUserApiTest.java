@@ -34,8 +34,8 @@ public class CardUserApiTest {
     public void cardUserCreate() {
 
         Individual individual = new Individual();
-        individual.setLast_name("TimApi16");
-        individual.setFirst_name("ZhouAPi16");
+        individual.setLast_name("TimApi17");
+        individual.setFirst_name("ZhouAPi17");
         individual.setDate_of_birth("1990-10-10");
         individual.setOccupation("aaa");
         individual.setAnnual_income("100000");
@@ -50,12 +50,22 @@ public class CardUserApiTest {
         document.setExpiry_date("2035-10-10");
 
 
-        String respStr = client.cardUserCreate("Tim-api-16",
-                "ztmsdu1238@snapmail.cc",
+        String respStr = client.cardUserCreate("Tim-api-17",
+                "ztmsdu1239@snapmail.cc",
                 "2100063",
-                "100021",
+                "100022",
                 individual,
                 document
+        );
+        System.out.println(respStr);
+    }
+
+    @Test
+    public void aipCardUserCreate() {
+        String respStr = client.aipCardUserCreate("Tim-api-18",
+                "ztmsdu1250@snapmail.cc",
+                "100124",
+                "2100063"
         );
         System.out.println(respStr);
     }
@@ -130,8 +140,8 @@ public class CardUserApiTest {
 
     @Test
     public void emailChange() {
-        String respStr = client.emailChange("1107523",
-                "ztmsdulv12@snapmail.cc",
+        String respStr = client.emailChange("1110786",
+                "ztmsdu1240@snapmail.cc",
                 "2100063",
                 String.valueOf(System.currentTimeMillis()));
         System.out.println(respStr);
