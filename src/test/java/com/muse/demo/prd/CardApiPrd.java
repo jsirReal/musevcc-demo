@@ -46,10 +46,10 @@ public class CardApiPrd {
 
     @Test
     public void cardQuery() {
-        String cardId = "VC1235902506176937990";
+        String cardId = "VC3201102450878283792";
         String respStr = client.cardQuery(cardId,
                 "2100063",
-                "1100083"
+                "1111029"
         );
         System.out.println(respStr);
     }

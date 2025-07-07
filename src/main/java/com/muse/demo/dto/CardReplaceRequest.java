@@ -35,4 +35,5 @@ public class CardReplaceRequest extends CommonRequest {
     @NotBlank
     private String request_id;
 
+
 }

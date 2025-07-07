@@ -62,9 +62,9 @@ public class CardUserApiTest {
 
     @Test
     public void aipCardUserCreate() {
-        String respStr = client.aipCardUserCreate("Tim-api-18",
-                "ztmsdu1250@snapmail.cc",
-                "100124",
+        String respStr = client.aipCardUserCreate("Tim-api-20",
+                "ztmsdu1253@snapmail.cc",
+                "100126",
                 "2100063"
         );
         System.out.println(respStr);
@@ -73,17 +73,17 @@ public class CardUserApiTest {
     @Test
     public void cardUserCreateWithKYCLink() {
 
-        String respStr = client.cardUserCreateWithKYCLink("kyc-202503040001",
-                "ztmsdu030401@snapmail.cc",
+        String respStr = client.cardUserCreateWithKYCLink("kyc-202506200001",
+                "ztmsdu1251@snapmail.cc",
                 "2100063",
-                "202503040001"
+                "202506200001"
         );
         System.out.println(respStr);
     }
 
     @Test
     public void generateKycLink() {
-        String xid = "202501220002";
+        String xid = "202506200001";
         log.info("XID：{}", xid);
         String respStr = client.generateKycLink(xid, "2100063");
 

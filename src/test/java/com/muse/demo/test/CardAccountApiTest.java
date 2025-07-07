@@ -24,11 +24,11 @@ public class CardAccountApiTest {
     public void cardAccountTopUp() {
         String requestId = "APPLY-"+ System.currentTimeMillis();
         String respStr = client.cardAccountTopUp(requestId,
-                "VC1235902506176937990",
+                "VC3236998688028917775",
                 "USDT",
                 "8",
                 "2100063",
-                "1100083"
+                "1111029"
         );
         System.out.println(respStr);
     }

@@ -85,7 +85,7 @@ public class MuseClient {
     }
 
     public String aipCardUserCreate(String user_name, String email,
-                                  String xid,String partner_id) {
+                                    String xid, String partner_id) {
         AipCardUserCreateRequest request = new AipCardUserCreateRequest();
         request.setUser_name(user_name);
         request.setEmail(email);
@@ -122,11 +122,10 @@ public class MuseClient {
     }
 
 
-
     /**
      * generate kyc application link for user
      */
-    public String generateKycLink(String xid,String partner_id) {
+    public String generateKycLink(String xid, String partner_id) {
         CardUserKycLinkRequest request = new CardUserKycLinkRequest();
         request.setUser_xid(xid);
         request.setPartner_id(partner_id);
@@ -185,7 +184,7 @@ public class MuseClient {
      * cardApply
      */
     public String cardApply(String request_id, String card_level, String card_product_id,
-                            String partner_id, String user_id,String embossed_name) {
+                            String partner_id, String user_id, String embossed_name) {
         CardApplyRequest request = new CardApplyRequest();
         request.setRequest_id(request_id);
         request.setCard_level(card_level);
@@ -541,7 +540,7 @@ public class MuseClient {
                 JSON.toJSONString(request));
     }
 
-    public String emailChange (String user_id,
+    public String emailChange(String user_id,
                               String email, String partner_id, String nonce) {
 
         EmailChangeRequest request = new EmailChangeRequest();
@@ -577,4 +576,132 @@ public class MuseClient {
         return OkHttpUtils.doPost(httpClient, baseUrl + "card/txn-verification-decline",
                 JSON.toJSONString(request));
     }
+
+    public String quotaCreate(String partner_id, String card_product_id, String card_level, String share_quota_name, String remark, String request_id) {
+        QuotaCreateRequest request = new QuotaCreateRequest();
+        request.setRequest_id(request_id);
+        request.setPartner_id(partner_id);
+        request.setCard_product_id(card_product_id);
+        request.setCard_level(card_level);
+        request.setShare_quota_name(share_quota_name);
+        request.setRemark(remark);
+
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/share-quota/quota/create",
+                JSON.toJSONString(request));
+    }
+
+    public String quotaFrozen(String share_quota_id, String partner_id, String request_id) {
+        QuotaFrozenRequest request = new QuotaFrozenRequest();
+        request.setPartner_id(partner_id);
+        request.setShare_quota_id(share_quota_id);
+        request.setRequest_id(request_id);
+
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/share-quota/quota/frozen",
+                JSON.toJSONString(request));
+    }
+
+    public String quotaUnfrozen(String share_quota_id, String partner_id, String request_id) {
+        QuotaFrozenRequest request = new QuotaFrozenRequest();
+        request.setShare_quota_id(share_quota_id);
+        request.setPartner_id(partner_id);
+        request.setRequest_id(request_id);
+
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/share-quota/quota/unfrozen",
+                JSON.toJSONString(request));
+    }
+
+    public String quotaList(String share_quota_id, String limit, String page, String partner_id) {
+        QuotaListRequest request = new QuotaListRequest();
+        request.setShare_quota_id(share_quota_id);
+        request.setLimit(limit);
+        request.setPage(page);
+        request.setPartner_id(partner_id);
+
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/share-quota/quota/list",
+                JSON.toJSONString(request));
+    }
+
+    public String txAdjustment(String share_quota_id, String amount, String partner_id, String remark, String request_id) {
+        TxAdjustmentRequest request = new TxAdjustmentRequest();
+        request.setShare_quota_id(share_quota_id);
+        request.setAmount(amount);
+        request.setPartner_id(partner_id);
+        request.setRequest_id(request_id);
+        request.setRemark(remark);
+
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/share-quota/quota/tx/adjustment",
+                JSON.toJSONString(request));
+    }
+
+    public String txList(String share_quota_id, String request_id, String strat_time, String end_time, String limit, String page, String partner_id) {
+        TxListRequest request = new TxListRequest();
+        request.setShare_quota_id(share_quota_id);
+        request.setRequest_id(request_id);
+        request.setStart_time(strat_time);
+        request.setEnd_time(end_time);
+        request.setLimit(limit);
+        request.setPage(page);
+        request.setPartner_id(partner_id);
+
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/share-quota/quota/tx/list",
+                JSON.toJSONString(request));
+    }
+
+    public String quotaCardApply(String share_quota_id, String user_id, String request_id, String card_product_id, String card_level, String phone_number, String phone_area_code, String partner_id) {
+        QuotaCardApplyRequest request = new QuotaCardApplyRequest();
+        request.setShare_quota_id(share_quota_id);
+        request.setUser_id(user_id);
+        request.setRequest_id(request_id);
+        request.setCard_product_id(card_product_id);
+        request.setCard_level(card_level);
+        request.setPhone_number(phone_number);
+        request.setPhone_area_code(phone_area_code);
+        request.setPartner_id(partner_id);
+
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/share-quota/apply",
+                JSON.toJSONString(request));
+    }
+
 }

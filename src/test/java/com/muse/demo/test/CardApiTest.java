@@ -28,9 +28,9 @@ public class CardApiTest {
         String requestId = "APPLY-" + System.currentTimeMillis();
         String respStr = client.cardApply(requestId,
                 "1",
-                "PD100000900001",
+                "PD100017500002",
                 "2100063",
-                "1109573",
+                "1111029",
                 "embossedNameTest"
         );
         System.out.println(respStr);
@@ -71,10 +71,10 @@ public class CardApiTest {
 
     @Test
     public void cardActivate() {
-        String cardId = "VC2836126953360457744";
+        String cardId = "VC3236998688028917775";
         String respStr = client.cardActivate(cardId,
                 "2100063",
-                "1100083"
+                "1111029"
         );
         System.out.println(respStr);
     }
@@ -101,10 +101,10 @@ public class CardApiTest {
 
     @Test
     public void cardUnlock() {
-        String cardId = "VC2512422964804419589";
+        String cardId = "VC3234068695698997251";
         String respStr = client.cardUnlock(cardId,
                 "2100063",
-                "1100083"
+                "1111029"
         );
         System.out.println(respStr);
     }
@@ -133,12 +133,13 @@ public class CardApiTest {
 
     @Test
     public void cardReplace() throws Exception {
+        String requestId = "Request-" + System.currentTimeMillis();
         String respStr = client.cardReplace(
-                "1100083",
-                "VC2509594299343241228",
+                "1111029",
+                "VC3230862004395573258",
                 "测试替换卡",
                 "2100063",
-                "11111222223"
+                requestId
         );
         System.out.println(respStr);
     }
@@ -156,8 +157,8 @@ public class CardApiTest {
     }
 
     @Test
-    public void txnVerificationConfirm() throws Exception{
-        String respStr =client.txnVerificationConfirm(
+    public void txnVerificationConfirm() throws Exception {
+        String respStr = client.txnVerificationConfirm(
                 "2100063",
                 "1100083",
                 "VC2509671471315615749",
@@ -169,8 +170,8 @@ public class CardApiTest {
 
 
     @Test
-    public void txnVerificationDecline() throws Exception{
-        String respStr=client.txnVerificationDecline(
+    public void txnVerificationDecline() throws Exception {
+        String respStr = client.txnVerificationDecline(
                 "2100063",
                 "1100083",
                 "VC2509671471315615749",
@@ -179,4 +180,129 @@ public class CardApiTest {
         );
         System.out.println(respStr);
     }
+
+    /**
+     * 创建共享额度
+     */
+    @Test
+    public void quotaCreate() throws Exception {
+        String requestId = "APPLY-" + System.currentTimeMillis();
+        String respStr = client.quotaCreate(
+                "2100063",
+                "PD100019500007",
+                "1",
+                "API-资金池-005",
+                "123",
+                requestId
+        );
+        System.out.println(respStr);
+    }
+
+    /**
+     * 暂停开卡-共享额度
+     * NORMAL到SUSPEND_OPEN_CARD
+     */
+    @Test
+    public void quotaFrozen() throws Exception {
+        String requestId = "APPLY-" + System.currentTimeMillis();
+        String respStr = client.quotaFrozen(
+                "CP3230851559035109382",
+                "2100063",
+                requestId
+
+        );
+        System.out.println(respStr);
+    }
+
+    /**
+     * 解冻共享额度
+     * SUSPEND_OPEN_CARD 到 NORMAL
+     * 超刷：FROZEN 不能解冻
+     */
+    @Test
+    public void quotaUnfrozen() throws Exception {
+        String requestId = "APPLY-" + System.currentTimeMillis();
+        String respStr = client.quotaUnfrozen(
+                "CP3230851559035109382",
+                "2100063",
+                requestId
+        );
+        System.out.println(respStr);
+    }
+
+    /**
+     * 查询共享额度列表
+     *
+     * @throws Exception
+     */
+    @Test
+    public void quotaList() throws Exception {
+        String respStr = client.quotaList(
+                "CP3233690772936491020",
+                "10",
+                "1",
+                "2100063"
+        );
+        System.out.println(respStr);
+    }
+
+    /**
+     * 共享额度调整
+     *
+     * @throws Exception
+     */
+    @Test
+    public void txAdjustment() throws Exception {
+        String requestId = "APPLY-" + System.currentTimeMillis();
+        String respStr = client.txAdjustment(
+                "CP3251889923761373194",
+                "10",
+                "2100063",
+                "APi代理商资金池转入",
+                requestId
+        );
+        System.out.println(respStr);
+    }
+
+    /**
+     * 查询共享额度交易列表
+     *
+     * @throws Exception
+     */
+    @Test
+    public void txList() throws Exception {
+        String requestId = "APPLY-" + System.currentTimeMillis();
+        String respStr = client.txList(
+                "CP3230228135941865479",
+                "",
+                "1751254149000",
+                "1782790149000",
+                "100",
+                "1",
+                "2100063"
+        );
+        System.out.println(respStr);
+    }
+
+    /**
+     * 申请资金池卡
+     *
+     * @throws Exception
+     */
+    @Test
+    public void quotaCardApply() throws Exception {
+        String requestId = "APPLY-" + System.currentTimeMillis();
+        String respStr = client.quotaCardApply(
+                "CP3251889923761373194",
+                "1111029",
+                requestId,
+                "PD100018000002",
+                "1",
+                "17689876878",
+                "86",
+                "2100063"
+        );
+        System.out.println(respStr);
+    }
+
 }
