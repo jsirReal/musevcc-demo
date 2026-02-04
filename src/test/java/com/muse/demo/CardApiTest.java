@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public class CardApiTest extends BaseTest {
 
+
     @Test
     public void cardApply() {
         String requestId = "APPLY-" + System.currentTimeMillis();
@@ -104,6 +105,10 @@ public class CardApiTest extends BaseTest {
         System.out.println(respStr);
     }
 
+    /**
+     * 修改ATM PIN
+     * @throws Exception
+     */
     @Test
     public void cardChangePin() throws Exception {
         String cardId = "VC1218089352690597900";

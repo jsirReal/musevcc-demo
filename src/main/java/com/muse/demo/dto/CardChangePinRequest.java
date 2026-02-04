@@ -20,7 +20,4 @@ public class CardChangePinRequest extends CommonRequest {
     @NotBlank
     private String card_pin;
 
-
-
-
 }

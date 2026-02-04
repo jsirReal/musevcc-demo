@@ -18,8 +18,12 @@ public class CardUserApiTest {
 
     /**
      * private key, please keep it in a safe place
+     --2102839 私钥
+    public static String privateKey = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDWDe/o5vaikZ5GzrGez6DD90OBiIqu95Ha8g+5oZ3KHBWUXsmqn5pSZqVbLK+R3hyNx4NmRwxDi7vaGcg2VHwZ3lIURJGKnjIA4rNWYLB/GCa3Vj9oiWhryndw5/YJf/WQFmw2++2A+2WdkVDCHDNRqVPmJSgxe/VRTaDRWiVtF3grd6R8o52GbUHGvB3IYKHccTAOJzD1oKUfu76bZTxu3AEG+2r5lsZ8rHPB45O1nhE2d/3g5OhmabCGNEGSnJkq71jvbKvjCTAWUDfBS/ra4KMOPq6FJC6ipw5OVL/oK5LcxCOo43zZPeNqAgr+VnuDqnvlaYZ2Cey7P58vsAwxAgMBAAECggEAEsT31perBHwJkYqmBUeOQKS9vv3csEUt3VGYqqW25u4hv8f0fcE/OE6/HOCtF/iujwmRtm4QL5uQ+inE1ivAEoodryCIlQu0VYLLaC10CH7zBSQ7TOSwmvQO12AFoVVesFbhAAzE6YiRw1hmyRCNOPHEtTNoo/crPoj0qyrRCZDKV4YyoRGDxWrM1gbxnKV8XmdKsoFPMvEweYnA9Y96ZluXekMorR7uakVCptpNc00U9EeTgl8QL7Yq6CWtLl1qRAfRsHYQmCXBO4ouD23EiRXSPIYFqMW8cE5JdgKW3W8AOTJ1ZwTN6aVPQ5JtavY9tn1+9QMzbAa8sTRL3j6SKQKBgQDqqUDrSRXlfXv31Rr8z7d9B5yMWr4DIXCZD9VvmJRR1zrF0er1WxrRiHCxkkGRjr9JWnAVFzh6fUf2wdXldXke0dviL+JlSZyjqDaDKXUmr0nqbCgLh9ckH2km+iUcic5rqiPUuis1BeP7jqZewF7DiT0SIKbPn5PB06Vw8xGeGQKBgQDphPlVzwqk1Q7KYKcNk+2TBoccSjSFF7AyyU8Ubuij0CI0aidartherfCwC2JQTnXyue8HEOQpZ/MKLb4vNSxnaXXWjA3Bov3oeDd4WTCzPqrNthLGb7t/0Qdxbkcb/I808W7zTde3vNg4PNe2F5JJVrzu+NMQ8q/NhhfQRbhx2QKBgQCT3EgyuV+ZtiL5+4bAy+WzW6tx6O+Xq2d2mrqDUeILW5IF+gqRxXE1nEJeMWktXYP8pYbAU1xcGjrRKjwsFIRYPiXN9RwzdFnF6YVHykSuNn9dvf7RnSub8Eriq3Xc8JxnzNI9BX2aMHcCGFWOmKpdjUk09ewGIWgKFuFFNXPhaQKBgQCSgqlk2veUn1AeTTHCZRNjcW8Hos78yfX0hzUkXsl7LbSoKgny7Uw3au5dpWbTd8asuVdsmX5tNBjaRATU3Ym0gAg8ybY/zSF83x/+VAcoDqNfWWLCOYvsD5uZ4VSgDH9U+j1gTXCQiN0nu5SjXHqdpNv5Gwhh08HVMtJyC6xDUQKBgDeNhzCLIpgMcUbstYXHMTawZmk0sEYR2lZHILCyXnQ/gwF85Th82589G2QTUvqdI/GLHCvD5S2sVsCNCrAgu9X/83JeohcWb3ElqKeHwBsQ6jLtryxN5MmulJgCwnhwRo/PSgMMtUuI/wUNMExS6ctv+jf2PtacVma7lasenrjd";
      */
     public static String privateKey = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCnI1kB3OyurSfUaqIc7QPVbehYFeAXz3wRbr0KfL3bkF42r9lKUV5s5S3Bqfwu/L2r8kCFCVg9p6BBEZQFoGNp0LHqYThm89rWfzfFom6hncnUIUu67PYxq2tjazZRj/PxKjaGckPowXe6tbLapV2SiexdXFbW9SlsQQstXQW75aug+PElCYmy4dnv2f7OTF1PAkUTxTR1WNVhWZMRdqozmko3UsWDmT92JSYIzeES2AjktWYNAFrKGv7k/66jVHbieS9JAN6XU5EzBQ1pvlBk3oLHYRk0YKJG9Xrw822OLN8hO/Ty0et7qy/f9C38Nfw4UG4b+ZySZQJ8WbKLJMAbAgMBAAECggEAHRvk5pQpjIqPw0kHDu6gmk1YB+9XZg4213pn5imvj0vnfLLHr0/YmDKZ8369cxmFlyrL3d+wxJwrJun+07QJXGaCdgWUoymZVX42om8VwYQPoKhj3hxjDGeEfn4vqajenYPylxvTg/gd+CCpE7d1Qo5O4juwzCNKoZX6cl4fH4gqUk/yxxzFtUdA3knECmC0SxxesSqKwlKhFPfkLdvH2lBuhojfE+2Yo9AMFz4GfvDA4ds7SYPplm7K/57EA0qE75IBxuCnUIBimMFViZanmh08zbHVdlUcN1fXlxJnyv5dXh65OzLU7t96S1OXsmT3dMpRY4iJkAHdLgKLcRzSQQKBgQDdXtDqgSLV9fv5W9RABfCKlabdO+jzGwglWDQyBtTTioaTMEwY4UIxRm4YR4pXg0QNJnO6ROTcGYKrOJDD+L2WilVgVE4zntsN0Aj3vWLb7Sf/0u87nbU/HydPiSEz8H1AET60oWSXM1MLVaswynBz27QklmTINtskoF6gu3dx8QKBgQDBSLMPDLKawFSU3psRRZVQpHBQQjvkeqBHFDQzeOReQvnExuTQ3F7CE7Vw57+pvyS905sirmwUGfS+1ACqeXVz4Kn9rV2GS930oCBplJQgs7aJK0p0fALvrtL+Qjsga3FDAS8xHPzTDj66NelJI1AOFiUY/VoKwdNn40D4KR3GywKBgCvrBbOgjxK3zJe6Gi/hfclgy0wU+LBSaplOGHzcUhjt4KkO6en9tq4j9O+oMdAO4M9jE46e4HCyNvRVMpNOo/5bz3hfAWzIVVk2LrFHx3cuY8MjTAcd0LmHKrtiz02IprCxOymG43gD3LPg+Sei4hB6RBEGLVRzXaK0llF5H8dhAoGAebfFgym04/1Qhnt03bibIjCbxf8f5m9OtdREV1G/RpkY31F9UQYl6kQtE8/thAEqKxyx6nI6/6Gk3fN2A+T/ER0fD/B4IBVwzhd0sehuK/Xgcps/hQF/e971YkblIzJmHhMF3ADsOiETYYKHyZYiWOybKhSJ+pI7BoY3KNADv2cCgYAWS/XUef5V+R0xnGv6PvPWjT7q/Oa1G1RJ3uSVa3qL2WEWiwJpg+dC6wBTDsx7CRp5X0kodabLUSqCXkaho61AMwgiAgPCwGTXe4dZRs99cgNJjrer9Gcf/CYVA/43tMyuFFSvV794/oZ59nBaF3JyzeZxo3NKUgGpaKIKrlixkg==";
+
+
     /**
      * platform public key, please download from musepay partner dashboard
      */
@@ -34,8 +38,8 @@ public class CardUserApiTest {
     public void cardUserCreate() {
 
         Individual individual = new Individual();
-        individual.setLast_name("TimApi17");
-        individual.setFirst_name("ZhouAPi17");
+        individual.setLast_name("TimApi18");
+        individual.setFirst_name("ZhouAPi18");
         individual.setDate_of_birth("1990-10-10");
         individual.setOccupation("aaa");
         individual.setAnnual_income("100000");
@@ -50,10 +54,10 @@ public class CardUserApiTest {
         document.setExpiry_date("2035-10-10");
 
 
-        String respStr = client.cardUserCreate("Tim-api-17",
-                "ztmsdu1239@snapmail.cc",
+        String respStr = client.cardUserCreate("Tim-api-21",
+                "ztmsdulvdls004@snapmail.cc",
                 "2100063",
-                "100022",
+                "300003",
                 individual,
                 document
         );
@@ -73,10 +77,10 @@ public class CardUserApiTest {
     @Test
     public void cardUserCreateWithKYCLink() {
 
-        String respStr = client.cardUserCreateWithKYCLink("kyc-202506200001",
-                "ztmsdu1251@snapmail.cc",
+        String respStr = client.cardUserCreateWithKYCLink("kyc-202506200111",
+                "ztmsdu1261@snapmail.cc",
                 "2100063",
-                "202506200001"
+                "202506200111"
         );
         System.out.println(respStr);
     }

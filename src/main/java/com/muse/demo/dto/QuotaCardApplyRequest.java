@@ -33,4 +33,6 @@ public class QuotaCardApplyRequest extends CommonRequest{
     @NotBlank
     private String phone_area_code;
 
+    private String embossed_name;
+
 }

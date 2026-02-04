@@ -33,4 +33,6 @@ public class LimitChangeRequest extends CommonRequest {
     @NotBlank
     private BigDecimal daily_purchase_limit;
 
+
+
 }

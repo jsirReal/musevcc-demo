@@ -385,6 +385,28 @@ public class MuseClient {
     }
 
     /**
+     * upay 特殊卡段 修改ATM PIN
+     */
+    @SneakyThrows
+    public String specialCardChangePin(String card_id, String pin, String partner_id, String user_id) {
+        CardChangePinRequest request = new CardChangePinRequest();
+        request.setCard_id(card_id);
+        request.setUser_id(user_id);
+        request.setCard_pin(RSAUtils.encrypt(pin, platformPublicKey));
+
+        request.setPartner_id(partner_id);
+        request.setSign_type("RSA");
+        request.setTimestamp(String.valueOf(System.currentTimeMillis()));
+        request.setNonce(String.valueOf(System.currentTimeMillis()));
+
+        SignUtils.sign(request, merchantPrivateKey);
+
+        return OkHttpUtils.doPost(httpClient, baseUrl + "card/get-change-pin-model",
+                JSON.toJSONString(request));
+    }
+
+
+    /**
      * cardAccountTopUp
      */
     public String cardAccountTopUp(String request_id, String card_id, String currency, String amount, String partner_id, String user_id) {
@@ -683,7 +705,7 @@ public class MuseClient {
                 JSON.toJSONString(request));
     }
 
-    public String quotaCardApply(String share_quota_id, String user_id, String request_id, String card_product_id, String card_level, String phone_number, String phone_area_code, String partner_id) {
+    public String quotaCardApply(String share_quota_id, String user_id, String request_id, String card_product_id, String card_level, String phone_number, String phone_area_code, String partner_id,String embossed_name) {
         QuotaCardApplyRequest request = new QuotaCardApplyRequest();
         request.setShare_quota_id(share_quota_id);
         request.setUser_id(user_id);
@@ -693,6 +715,7 @@ public class MuseClient {
         request.setPhone_number(phone_number);
         request.setPhone_area_code(phone_area_code);
         request.setPartner_id(partner_id);
+        request.setEmbossed_name(embossed_name);
 
         request.setSign_type("RSA");
         request.setTimestamp(String.valueOf(System.currentTimeMillis()));
@@ -703,5 +726,4 @@ public class MuseClient {
         return OkHttpUtils.doPost(httpClient, baseUrl + "card/share-quota/apply",
                 JSON.toJSONString(request));
     }
-
 }

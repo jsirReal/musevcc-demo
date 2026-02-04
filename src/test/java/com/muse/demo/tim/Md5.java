@@ -23,7 +23,7 @@ public class Md5 {
     }
 
     public static void main(String[] args) {
-        String myString = "QWEasd123@";
+        String myString = "NBVFkC/l15FiNeIGhuzJiQ==";
         String md5Hash = getMD5Hash(myString);
         System.out.println("MD5 Hash: " + md5Hash + new Date() );
     }
